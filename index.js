@@ -1,4 +1,6 @@
 import { fifaData } from './fifa.js';
+
+console.log("Original data set:");
 console.log(fifaData);
 
 
@@ -7,6 +9,9 @@ console.log(fifaData);
 /* Task 1: Investigate the data above. Practice accessing data by console.log-ing the following pieces of data 
 
 (a) Home Team name for 2014 world cup final
+
+
+
 (b) Away Team name for 2014 world cup final
 (c) Home Team goals for 2014 world cup final
 (d) Away Team goals for 2014 world cup final
@@ -15,31 +20,42 @@ console.log(fifaData);
 
 /* Task 2: Create a function called  getFinals that takes `data` as an argument and returns an array of objects with only finals data */
 
-function getFinals(/* code here */) {
+function getFinals(data) {
 
-    /* code here */
+    return data.filter((finals) => {
+        return finals.Stage.toLowerCase().includes("final");
+    });
 
 };
+
+console.log("getFinals output:");
+console.log(getFinals(fifaData));
 
 /* Task 3: Impliment a higher-order function called `getYears` that accepts the callback function `getFinals`, and returns an array called `years` containing all of the years in the dataset */
 
-function getYears(/* code here */) {
+function getYears(cbf) {
 
-    /* code here */
+    const years = cbf.map((yrs) => {
+        return {"Year": yrs.Year}; // Do they only want the individual years, or the years for each getFinals entry? I am assuming each entry for now.
+    });
+
+    return years;
 
 };
 
-getYears();
+console.log("getYears output:")
+console.log(getYears(getFinals(fifaData)));
 
 /* Task 5: Impliment a higher-order function called `getWinners`, that accepts the callback function `getFinals()` and determine the winner (home or away) of each `finals` game. Return the name of all winning countries in an array called `winners` */ 
 
-function getWinners(/* code here */) {
+function getWinners(cbf) {
 
     /* code here */
 
 };
 
-getWinners();
+console.log("getWinners output:");
+console.log();
 
 /* Task 6: Implement a higher-order function called `getWinnersByYear` that accepts the following parameters and returns a set of strings "In {year}, {country} won the world cup!" 
 
@@ -52,7 +68,8 @@ function getAllWinners(/* code here */) {
 
 };
 
-getAllWinners();
+console.log("getAllWinners output:");
+console.log();
 
 /* Task 7: Create a function called `getCountryWins` that takes the parameters `data` and `team initials` and returns the number of world cup wins that country has had. 
 
@@ -65,7 +82,8 @@ function getCountryWins(/* code here */) {
 
 };
 
-getCountryWins();
+console.log("getCountryWins output:");
+console.log();
 
 
 /* Task 8: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
@@ -76,7 +94,8 @@ function getGoals(/* code here */) {
 
 };
 
-getGoals();
+console.log("getGoals output:");
+console.log();
 
 
 /* Task 9: Write a function called badDefense() that accepts a parameter `data` and calculates the team with the most goals scored against them per appearance (average goals against) in the World Cup finals */
@@ -87,7 +106,8 @@ function badDefense(/* code here */) {
 
 };
 
-badDefense();
+console.log("badDefense output:");
+console.log();
 
 
 /* Task 10: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
@@ -98,7 +118,8 @@ function getAverageGoals(/* code here */) {
 
 };
 
-getAverageGoals();
+console.log("getAverageGoals output:");
+console.log();
 
 
 /// STRETCH 🥅 //
