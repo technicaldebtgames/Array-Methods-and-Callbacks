@@ -99,10 +99,18 @@ function getAllWinners(cbfW, cbfY) {
     // Tried a lot of stuff. Not sure how to resolve the issues I ran into. (cbfY appears to always be undefined and I can't get it to resolve.)
     // Solutions on stackoverflow seem to suggest Promises, async, etc. Don't think that's right since that's out of the scope of this class right now.
 
+    const winners = cbfW;
+    const years = cbfY;
+
+    console.log(winners);
+    console.log(years);
+
+    return "test";
+
 };
 
 console.log("getAllWinners output:");
-//console.log(getAllWinners(getWinners(getFinals(fifaData))), getYears(getFinals(fifaData)));
+console.log(getAllWinners(getWinners(getFinals(fifaData))), getYears(getFinals(fifaData)));
 
 /* Task 7: Create a function called `getCountryWins` that takes the parameters `data` and `team initials` and returns the number of world cup wins that country has had. 
 
