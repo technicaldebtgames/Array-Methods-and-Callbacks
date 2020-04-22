@@ -51,7 +51,7 @@ function getYears(cbf) {
 
     const years = [];
     
-    cbf.map((yrs) => {
+    cbf(fifaData).map(function(yrs) {
         years.push(yrs.Year);
     });
 
@@ -60,7 +60,7 @@ function getYears(cbf) {
 };
 
 console.log("getYears output:")
-console.log(getYears(getFinals(fifaData)));
+console.log(getYears(getFinals));
 
 /* Task 5: Impliment a higher-order function called `getWinners`, that accepts the callback function `getFinals()` and determine the winner (home or away) of each `finals` game. Return the name of all winning countries in an array called `winners` */ 
 
@@ -68,7 +68,7 @@ function getWinners(cbf) {
 
     const winners = [];
     
-    cbf.forEach(function(element) {
+    cbf(fifaData).forEach(function(element) {
         if (element["Home Team Goals"] > element["Away Team Goals"]){
             winners.push(element["Home Team Name"]);
         }
@@ -85,7 +85,7 @@ function getWinners(cbf) {
 };
 
 console.log("getWinners output:");
-console.log(getWinners(getFinals(fifaData)));
+console.log(getWinners(getFinals));
 
 /* Task 6: Implement a higher-order function called `getWinnersByYear` that accepts the following parameters and returns a set of strings "In {year}, {country} won the world cup!" 
 
@@ -96,21 +96,23 @@ Parameters:
 
 function getAllWinners(cbfW, cbfY) {
 
-    // Tried a lot of stuff. Not sure how to resolve the issues I ran into. (cbfY appears to always be undefined and I can't get it to resolve.)
-    // Solutions on stackoverflow seem to suggest Promises, async, etc. Don't think that's right since that's out of the scope of this class right now.
+    const winners = cbfW(getFinals);
+    const years = cbfY(getFinals);
 
-    const winners = cbfW;
-    const years = cbfY;
+    const strs = [];
 
-    console.log(winners);
-    console.log(years);
+    for (let i = 0; i < winners.length; i++) {
 
-    return "test";
+        strs.push("In " + years[i] + ", " + winners[i] + " won the world cup!");
+
+    }
+
+    return strs;
 
 };
 
 console.log("getAllWinners output:");
-console.log(getAllWinners(getWinners(getFinals(fifaData))), getYears(getFinals(fifaData)));
+console.log(getAllWinners(getWinners, getYears));
 
 /* Task 7: Create a function called `getCountryWins` that takes the parameters `data` and `team initials` and returns the number of world cup wins that country has had. 
 
@@ -119,7 +121,7 @@ Hint: use `.reduce` */
 
 function getCountryWins(data, initials) {
 
-    const winners = getWinners(getFinals(data));
+    const winners = getWinners(getFinals);
     let teamName = null;
 
     // Find team name from initials.
